@@ -111,11 +111,13 @@ fn get_probability_of_each_word() -> HashMap<String, f32> {
 }
 
 fn main() {
+    // TODO: Move to separate layer
     let mut misspelled_word = String::new();
     let stdin = io::stdin();
     stdin.lock().read_line(&mut misspelled_word).unwrap();
     let probability_of_each_word = get_probability_of_each_word();
-    let til_edit2 = get_til_edit2(&misspelled_word);
+    // TODO: give more chance to edit1 and word than edit2
+    let til_edit2 = get_til_edit2(misspelled_word.trim());
     let known_words = til_edit2
         .into_iter()
         .filter(|word| match probability_of_each_word.get(word) {
